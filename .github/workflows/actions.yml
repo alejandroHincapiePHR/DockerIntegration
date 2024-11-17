@@ -32,7 +32,7 @@
           uses: docker/build-push-action@v5
           with:
             push: true
-            tags: alh7867/mywebapp
+            tags: ${{secrets.DOCKER_USERNAME}}/mywebapp
 
     deploy:
       needs: build
@@ -46,11 +46,11 @@
         -
           name: clear docker image
           run: |
-            ssh -i key.pem ubuntu@54.175.247.196 'docker rmi -f alh7867/mywebapp:latest || true'
+            ssh -i key.pem ubuntu@54.175.247.196 'docker rmi -f ${{secrets.DOCKER_USERNAME}}/mywebapp:latest || true'
         -
           name: Pull docker image
           run: |
-            ssh -i key.pem ubuntu@54.175.247.196 'docker pull alh7867/mywebapp:latest'
+            ssh -i key.pem ubuntu@54.175.247.196 'docker pull ${{secrets.DOCKER_USERNAME}}/mywebapp:latest'
         -
           name: stop running container
           run: |
@@ -58,4 +58,4 @@
         -
           name: Run new container
           run: |
-            ssh -i key.pem ubuntu@54.175.247.196 'sudo docker run -d -p 80:80 alh7867/mywebapp:latest'
+            ssh -i key.pem ubuntu@54.175.247.196 'sudo docker run -d -p 80:80 ${{secrets.DOCKER_USERNAME}}/mywebapp:latest'
