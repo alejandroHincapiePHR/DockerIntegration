@@ -34,28 +34,28 @@
             push: true
             tags: alh7867/mywebapp
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      -
-        name: Set permission for private key
-        run: |
-          echo "${{secrets.SSH_KEYPAIR}}" > key.pem
-          chmod 600 key.pem
-      -
-        name: clear docker image
-        run: |
-          ssh -i key.pem ubuntu@54.175.247.196 'docker rmi -f alh7867/mywebapp:latest || true'
-      -
-        name: Pull docker image
-        run: |
-          ssh -i key.pem ubuntu@54.175.247.196 'docker pull alh7867/mywebapp:latest'
-      -
-        name: stop running container
-        run: |
-          ssh -i key.pem ubuntu@54.175.247.196 'sudo docker rm -f $(docker ps -aq) || true'
-      -
-        name: Run new container
-        run: |
-          ssh -i key.pem ubuntu@54.175.247.196 'sudo docker run -d -p 80:80 alh7867/mywebapp:latest'
+    deploy:
+      needs: build
+      runs-on: ubuntu-latest
+      steps:
+        -
+          name: Set permission for private key
+          run: |
+            echo "${{secrets.SSH_KEYPAIR}}" > key.pem
+            chmod 600 key.pem
+        -
+          name: clear docker image
+          run: |
+            ssh -i key.pem ubuntu@54.175.247.196 'docker rmi -f alh7867/mywebapp:latest || true'
+        -
+          name: Pull docker image
+          run: |
+            ssh -i key.pem ubuntu@54.175.247.196 'docker pull alh7867/mywebapp:latest'
+        -
+          name: stop running container
+          run: |
+            ssh -i key.pem ubuntu@54.175.247.196 'sudo docker rm -f $(docker ps -aq) || true'
+        -
+          name: Run new container
+          run: |
+            ssh -i key.pem ubuntu@54.175.247.196 'sudo docker run -d -p 80:80 alh7867/mywebapp:latest'
