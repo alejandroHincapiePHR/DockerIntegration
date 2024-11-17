@@ -1,8 +1,7 @@
   name: pushToAWS
   on:
     push:
-      branches:
-        -master
+
 
   env:
     DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
