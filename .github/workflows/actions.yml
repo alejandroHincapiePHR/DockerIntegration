@@ -54,7 +54,7 @@
         -
           name: stop running container
           run: |
-            ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@54.175.247.196 'sudo docker rm -f $(docker ps -aq)'
+            ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@54.175.247.196 'sudo docker rm -f $(sudo docker ps -aq)'
         -
           name: Run new container
           run: |
