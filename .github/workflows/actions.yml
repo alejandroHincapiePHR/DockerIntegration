@@ -46,16 +46,16 @@
         -
           name: clear docker image
           run: |
-            ssh -i key.pem ubuntu@54.175.247.196 'docker rmi -f ${{secrets.DOCKER_USERNAME}}/mywebapp:latest || true'
+            ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@54.175.247.196 'docker rmi -f ${{secrets.DOCKER_USERNAME}}/mywebapp:latest || true'
         -
           name: Pull docker image
           run: |
-            ssh -i key.pem ubuntu@54.175.247.196 'docker pull ${{secrets.DOCKER_USERNAME}}/mywebapp:latest'
+            ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@54.175.247.196 'docker pull ${{secrets.DOCKER_USERNAME}}/mywebapp:latest'
         -
           name: stop running container
           run: |
-            ssh -i key.pem ubuntu@54.175.247.196 'sudo docker rm -f $(docker ps -aq) || true'
+            ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@54.175.247.196 'sudo docker rm -f $(docker ps -aq) || true'
         -
           name: Run new container
           run: |
-            ssh -i key.pem ubuntu@54.175.247.196 'sudo docker run -d -p 80:80 ${{secrets.DOCKER_USERNAME}}/mywebapp:latest'
+            ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@54.175.247.196 'sudo docker run -d -p 80:80 ${{secrets.DOCKER_USERNAME}}/mywebapp:latest'
