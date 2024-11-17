@@ -46,11 +46,11 @@
         -
           name: clear docker image
           run: |
-            ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@54.175.247.196 'docker rmi -f alh7867/mywebapp:latest || true'
+            ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@54.175.247.196 'sudo docker rmi -f alh7867/mywebapp:latest || true'
         -
           name: Pull docker image
           run: |
-            ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@54.175.247.196 'docker pull alh7867/mywebapp:latest || true'
+            ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@54.175.247.196 'sudo docker pull alh7867/mywebapp:latest || true'
         -
           name: stop running container
           run: |
